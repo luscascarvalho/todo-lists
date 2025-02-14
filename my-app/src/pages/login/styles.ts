@@ -26,7 +26,6 @@ export const style = StyleSheet.create({
     height: Dimensions.get("window").height / 3,
     width: "100%",
     alignItems: 'center',
-    justifyContent: 'center'
   },
 
   logo: {
@@ -63,11 +62,35 @@ export const style = StyleSheet.create({
     height: '100%',
     width: '90%',
     borderRadius: 40,
+    paddingLeft: 5,
   },
 
   button: {
-    width: 200,
+    width: 250,
     height: 50,
     alignItems: 'center',
-  }
+    justifyContent: 'center', 
+    backgroundColor: themas.color.primary,
+    borderRadius: 40,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3
+    }, 
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
+  },
+
+  textButton: {
+    fontSize: 16,
+    color: '#FFFFFF',
+    fontWeight: 'bold'
+  },
+
+  textBottom: {
+    fontSize: 16,
+    color: themas.color.gray,
+  },
+
 });
