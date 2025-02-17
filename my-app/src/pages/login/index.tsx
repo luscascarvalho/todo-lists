@@ -14,6 +14,7 @@ import { style } from "./styles";
 import Logo from "../../assets/logo.png";
 import { MaterialIcons } from "@expo/vector-icons";
 import { themas } from "../../global/themes";
+import { Input } from "../../components/input/intex";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -26,7 +27,7 @@ export default function Login() {
 
       if (!email || !password) {
         Alert.alert("Atenção", "Informe os campos obrigatórios!");
-        return setLoading(false); 
+        return setLoading(false);
       }
 
       setTimeout(() => {
@@ -51,7 +52,8 @@ export default function Login() {
       </View>
 
       <View style={style.boxMid}>
-        <Text style={style.titleInput}>E-mail</Text>
+        <Input />
+        {/* <Text style={style.titleInput}>E-mail</Text>
         <View style={style.boxInput}>
           <TextInput
             style={style.input}
@@ -72,7 +74,7 @@ export default function Login() {
             size={20}
             color={themas.color.gray}
           />
-        </View>
+        </View> */}
       </View>
 
       <View style={style.boxBottom}>
