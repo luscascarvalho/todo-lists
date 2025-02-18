@@ -52,7 +52,7 @@ export default function Login() {
       </View>
 
       <View style={style.boxMid}>
-        <Input />
+        <Input title="E-mail"/>
         {/* <Text style={style.titleInput}>E-mail</Text>
         <View style={style.boxInput}>
           <TextInput
