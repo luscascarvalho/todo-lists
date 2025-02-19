@@ -27,4 +27,8 @@ export const style = StyleSheet.create({
     color: themas.color.gray,
     marginTop: 20
   },
+
+  Icon: {
+    width: '100%'
+  }
 });

@@ -40,15 +40,55 @@ export const Input = forwardRef(
       ...rest
     } = Props;
 
+    const calculateSizeWidth = () => {
+      if (IconLeft && IconRight) {
+        return "80%";
+      } else if (IconLeft || IconRight) {
+        return "90%";
+      } else {
+        return "100%";
+      }
+    };
+
+    const calculateSizePaddingLeft = () => {
+      if (IconLeft && IconRight) {
+        return 5;
+      } else if (IconLeft || IconRight) {
+        return 10;
+      } else {
+        return 20;
+      }
+    };
+
     return (
       <Fragment>
         <Text style={style.titleInput}>{title}</Text>
-        <View style={style.boxInput}>
-          <TouchableOpacity>
-            <IconLeft name={IconLeftName as any} size={20} color={themas.color.gray} style={style.Icon}
-          </TouchableOpacity>
-          <TextInput style={style.input} />
-          <MaterialIcons name="email" size={20} color={themas.color.gray} />
+        <View style={[style.boxInput, {paddingLeft: calculateSizePaddingLeft()}]}>
+          {IconLeft && IconLeftName && (
+            <TouchableOpacity>
+              <IconLeft
+                name={IconLeftName as any}
+                size={20}
+                color={themas.color.gray}
+                style={style.Icon}
+              />
+            </TouchableOpacity>
+          )}
+          <TextInput
+            style={[style.input, { width: calculateSizeWidth() }]}
+            {...rest}
+          />
+
+          {IconRight && IconRightName && (
+            <TouchableOpacity>
+              <IconRight
+                name={IconRightName as any}
+                size={20}
+                color={themas.color.gray}
+                style={style.Icon}
+              />
+            </TouchableOpacity>
+          )}
         </View>
       </Fragment>
     );

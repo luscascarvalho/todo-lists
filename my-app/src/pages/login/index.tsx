@@ -12,7 +12,7 @@ import {
 
 import { style } from "./styles";
 import Logo from "../../assets/logo.png";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, Octicons } from "@expo/vector-icons";
 import { themas } from "../../global/themes";
 import { Input } from "../../components/input/intex";
 
@@ -52,29 +52,8 @@ export default function Login() {
       </View>
 
       <View style={style.boxMid}>
-        <Input title="E-mail"/>
-        {/* <Text style={style.titleInput}>E-mail</Text>
-        <View style={style.boxInput}>
-          <TextInput
-            style={style.input}
-            value={email}
-            onChangeText={(e) => setEmail(e)}
-          />
-          <MaterialIcons name="email" size={20} color={themas.color.gray} />
-        </View>
-        <Text style={style.titleInput}>Senha</Text>
-        <View style={style.boxInput}>
-          <TextInput
-            style={style.input}
-            value={password}
-            onChangeText={(e) => setPassword(e)}
-          />
-          <MaterialIcons
-            name="remove-red-eye"
-            size={20}
-            color={themas.color.gray}
-          />
-        </View> */}
+        <Input title="E-mail" IconRightName="email" IconRight={MaterialIcons} value={email} onChangeText={setEmail}/>
+        <Input title="Senha" IconRightName="eye-closed" IconRight={Octicons} value={password} onChangeText={setPassword}/>
       </View>
 
       <View style={style.boxBottom}>
