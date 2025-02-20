@@ -52,7 +52,7 @@ export const Input = forwardRef(
 
     const calculateSizePaddingLeft = () => {
       if (IconLeft && IconRight) {
-        return 5;
+        return 0;
       } else if (IconLeft || IconRight) {
         return 10;
       } else {
@@ -62,10 +62,12 @@ export const Input = forwardRef(
 
     return (
       <Fragment>
-        <Text style={style.titleInput}>{title}</Text>
-        <View style={[style.boxInput, {paddingLeft: calculateSizePaddingLeft()}]}>
+        {title && <Text style={style.titleInput}>{title}</Text>}
+        <View
+          style={[style.boxInput, { paddingLeft: calculateSizePaddingLeft() }]}
+        >
           {IconLeft && IconLeftName && (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onIconLeftPress} style={style.button}>
               <IconLeft
                 name={IconLeftName as any}
                 size={20}
@@ -80,7 +82,7 @@ export const Input = forwardRef(
           />
 
           {IconRight && IconRightName && (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onIconRightPress} style={style.button}>
               <IconRight
                 name={IconRightName as any}
                 size={20}

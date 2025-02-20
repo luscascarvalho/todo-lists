@@ -15,10 +15,12 @@ import Logo from "../../assets/logo.png";
 import { MaterialIcons, Octicons } from "@expo/vector-icons";
 import { themas } from "../../global/themes";
 import { Input } from "../../components/input/intex";
+import { Button } from "../../components/button";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(true);
   const [loading, setLoading] = useState(false);
 
   async function getLogin() {
@@ -52,18 +54,26 @@ export default function Login() {
       </View>
 
       <View style={style.boxMid}>
-        <Input title="E-mail" IconRightName="email" IconRight={MaterialIcons} value={email} onChangeText={setEmail}/>
-        <Input title="Senha" IconRightName="eye-closed" IconRight={Octicons} value={password} onChangeText={setPassword}/>
+        <Input
+          title="E-mail"
+          IconRightName="email"
+          IconRight={MaterialIcons}
+          value={email}
+          onChangeText={setEmail}
+        />
+        <Input
+          title="Senha"
+          IconRightName={showPassword ? "eye-closed" : "eye"}
+          IconRight={Octicons}
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={showPassword}
+          onIconRightPress={() => setShowPassword(!showPassword)}
+        />
       </View>
 
       <View style={style.boxBottom}>
-        <TouchableOpacity style={style.button} onPress={() => getLogin()}>
-          {loading ? (
-            <ActivityIndicator color={"#FFFFFF"} size={"small"} />
-          ) : (
-            <Text style={style.textButton}>Entrar</Text>
-          )}
-        </TouchableOpacity>
+        <Button text="ENTRAR" loading={loading} onPress={() => getLogin()}/>
       </View>
       <Text style={style.textBottom}>
         Não tem conta?{" "}
