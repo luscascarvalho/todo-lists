@@ -16,8 +16,11 @@ import { MaterialIcons, Octicons } from "@expo/vector-icons";
 import { themas } from "../../global/themes";
 import { Input } from "../../components/input/intex";
 import { Button } from "../../components/button";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 export default function Login() {
+  const navigation = useNavigation<NavigationProp<any>>();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(true);
@@ -26,19 +29,21 @@ export default function Login() {
   async function getLogin() {
     try {
       setLoading(true);
-
+  
       if (!email || !password) {
         Alert.alert("Atenção", "Informe os campos obrigatórios!");
-        return setLoading(false);
+        setLoading(false); 
+        return; 
       }
-
+  
       setTimeout(() => {
-        if (email == "usuario@gmail.com" && password == "123456") {
+        if (email === "usuario@gmail.com" && password === "123456") {
           Alert.alert("Logado com sucesso!");
+          navigation.navigate("BottomRoutes");
         } else {
           Alert.alert("Usuário não encontrado!");
         }
-
+  
         setLoading(false);
       }, 3000);
     } catch (error) {
@@ -73,7 +78,7 @@ export default function Login() {
       </View>
 
       <View style={style.boxBottom}>
-        <Button text="ENTRAR" loading={loading} onPress={() => getLogin()}/>
+        <Button text="ENTRAR" loading={loading} onPress={() => getLogin()} />
       </View>
       <Text style={style.textBottom}>
         Não tem conta?{" "}
