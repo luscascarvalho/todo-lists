@@ -39,7 +39,7 @@ export default function Login() {
       setTimeout(() => {
         if (email === "usuario@gmail.com" && password === "123456") {
           Alert.alert("Logado com sucesso!");
-          navigation.navigate("BottomRoutes");
+          navigation.reset({routes: [{name: "BottomRoutes"}]});
         } else {
           Alert.alert("Usuário não encontrado!");
         }

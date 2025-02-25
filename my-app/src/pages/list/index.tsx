@@ -1,11 +1,11 @@
 import React from "react";
 
-import { Text } from 'react-native';
+import { Text, View } from "react-native";
 
 export default function List() {
-    return (
-        <Text>
-            Olá mundo
-        </Text>
-    )
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Olá mundo das listas doida</Text>    
+    </View>
+  );
 }
