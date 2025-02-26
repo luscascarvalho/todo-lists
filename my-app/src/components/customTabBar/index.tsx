@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import {
   ActivityIndicator,
@@ -18,6 +18,7 @@ import {
   MaterialIcons,
 } from "@expo/vector-icons";
 import { themas } from "../../global/themes";
+import { AuthContextList } from "../../context/authContext_list";
 
 interface CustomTabBarProps {
   state: any;
@@ -25,6 +26,7 @@ interface CustomTabBarProps {
 }
 
 export default function CustomTabBar({ state, navigation }: CustomTabBarProps) {
+  const { onOpen } = useContext<any>(AuthContextList);
 
   const go = (screenName: string) => {
     navigation.navigate(screenName);
@@ -43,7 +45,7 @@ export default function CustomTabBar({ state, navigation }: CustomTabBarProps) {
         />
       </TouchableOpacity>
 
-      <TouchableOpacity style={style.tabItemButton}>
+      <TouchableOpacity style={style.tabItemButton} onPress={() => onOpen()}>
         <View style={{ width: "100%", left: 10, top: 4 }}>
           <Entypo name="plus" size={40} color="#FFFFFF" />
         </View>
