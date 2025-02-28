@@ -5,7 +5,14 @@ import { style } from "./style";
 import { Input } from "../../components/input/intex";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const data: any = [
+type PropCard = {
+  item: number;
+  title: string;
+  description: string;
+  flag: "urgente" | "opcional";
+};
+
+const data: Array<PropCard> = [
   {
     item: 0,
     title: "Realizar a tarefa de casa",
@@ -29,6 +36,10 @@ const data: any = [
 ];
 
 export default function List() {
+  const renderCard = (item: PropCard) => {
+    return <Text>{item.title}</Text>;
+  };
+
   return (
     <View style={style.container}>
       <View style={style.header}>
@@ -45,7 +56,14 @@ export default function List() {
       </View>
 
       <View style={style.boxList}>
-        <FlatList />
+        <FlatList
+          data={data}
+          style={{ marginTop: 40, paddingHorizontal: 30 }}
+          keyExtractor={(item, index) => item.item.toString()}
+          renderItem={({ item, index }) => {
+            return renderCard(item);
+          }}
+        />
       </View>
     </View>
   );
