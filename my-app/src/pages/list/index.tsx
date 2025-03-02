@@ -1,9 +1,10 @@
 import React from "react";
 
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { style } from "./style";
 import { Input } from "../../components/input/intex";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Ball } from "../../components/ball";
 
 type PropCard = {
   item: number;
@@ -37,7 +38,22 @@ const data: Array<PropCard> = [
 
 export default function List() {
   const renderCard = (item: PropCard) => {
-    return <Text>{item.title}</Text>;
+    return (
+      <TouchableOpacity style={style.card}>
+        <View style={style.rowCard}>
+          <View style={style.rowCardLeft}>
+            <Ball color="red"/>
+
+            <View>
+              <Text>{item.title}</Text>
+              <Text>{item.description}</Text>
+            </View>
+          </View>
+
+          {/* <Flag /> */}
+        </View>
+      </TouchableOpacity>
+    );
   };
 
   return (
