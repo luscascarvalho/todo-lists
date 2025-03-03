@@ -53,7 +53,15 @@ export const style = StyleSheet.create({
         flexDirection: 'row',
         gap: 10,
         alignItems: 'center',
-    }
+    },
 
+    titleCard: {
+        fontSize: 16,
+        fontWeight: 'bold'
+    },
+
+    descriptionCard: {
+        color: themas.color.gray
+    }
     
 })
