@@ -1,9 +1,11 @@
 import React, { forwardRef, Fragment, LegacyRef } from "react";
 
 import {
+  StyleProp,
   Text,
   TextInput,
   TextInputProps,
+  TextStyle,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -25,6 +27,8 @@ type Props = TextInputProps & {
   title?: string;
   onIconLeftPress?: () => void;
   onIconRightPress?: () => void;
+  height?: number,
+  labelStyle: StyleProp<TextStyle>
 };
 
 export const Input = forwardRef(
@@ -37,6 +41,8 @@ export const Input = forwardRef(
       title,
       onIconLeftPress,
       onIconRightPress,
+      labelStyle,
+      height,
       ...rest
     } = Props;
 
@@ -62,9 +68,9 @@ export const Input = forwardRef(
 
     return (
       <Fragment>
-        {title && <Text style={style.titleInput}>{title}</Text>}
+        {title && <Text style={[style.titleInput, labelStyle]}>{title}</Text>}
         <View
-          style={[style.boxInput, { paddingLeft: calculateSizePaddingLeft() }]}
+          style={[style.boxInput, { paddingLeft: calculateSizePaddingLeft(), height: height || 40 }]}
         >
           {IconLeft && IconLeftName && (
             <TouchableOpacity onPress={onIconLeftPress} style={style.button}>
@@ -77,7 +83,7 @@ export const Input = forwardRef(
             </TouchableOpacity>
           )}
           <TextInput
-            style={[style.input, { width: calculateSizeWidth() }]}
+            style={[style.input, { width: calculateSizeWidth(), height: '100%' }]}
             {...rest}
           />
 
