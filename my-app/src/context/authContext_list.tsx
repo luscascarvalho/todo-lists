@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useRef } from "react";
+import React, { createContext, useContext, useRef, useState } from "react";
 import {
   Alert,
   Dimensions,
@@ -10,21 +10,48 @@ import {
 import { Modalize } from "react-native-modalize";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import { Input } from "../components/input/intex";
+import { themas } from "../global/themes";
+import { Flag } from "../components/flag";
 
 export const AuthContextList: any = createContext({});
 
+const flags = [
+  {
+    caption: "urgente",
+    color: themas.color.red,
+  },
+
+  {
+    caption: "opcional",
+    color: themas.color.blueLight,
+  },
+];
+
 export const AuthProviderList = (props: any): any => {
   const modalizeRef = useRef<Modalize>(null);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   const onOpen = () => {
     modalizeRef.current?.open();
   };
 
+  const onClose = () => {
+    modalizeRef?.current?.close();
+  };
+
+  const renderFlag = () =>
+    flags.map((item, index) => (
+      <TouchableOpacity key={index}>
+        <Flag caption={item.caption} color={item.color} />
+      </TouchableOpacity>
+    ));
+
   const container = () => {
     return (
       <View style={style.container}>
         <View style={style.header}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => onClose()}>
             <MaterialIcons name="close" size={30} />
           </TouchableOpacity>
 
@@ -36,15 +63,21 @@ export const AuthProviderList = (props: any): any => {
         </View>
         <View style={style.content}>
           <Input title="Titulo:" labelStyle={style.label} />
-          <Input title="Descrição:" labelStyle={style.label} height={100} multiline numberOfLines={5}/>
+          <Input
+            title="Descrição:"
+            labelStyle={style.label}
+            height={100}
+            multiline
+            numberOfLines={5}
+          />
 
           <View style={{ width: "40%" }}>
-            <Input title="Tempo limite:" labelStyle={style.label}/>
+            <Input title="Tempo limite:" labelStyle={style.label} />
           </View>
 
           <View style={style.containerFlag}>
             <Text style={style.label}>Flags: </Text>
-            <View style={{}}></View>
+            <View style={style.rowFlags}>{renderFlag()}</View>
           </View>
         </View>
       </View>
@@ -99,5 +132,11 @@ export const style = StyleSheet.create({
   label: {
     fontWeight: "bold",
     color: "FFFFFF",
+  },
+
+  rowFlags: {
+    flexDirection: "row",
+    gap: 10,
+    marginTop: 10,
   },
 });
