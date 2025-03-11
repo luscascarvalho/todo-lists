@@ -27,8 +27,8 @@ type Props = TextInputProps & {
   title?: string;
   onIconLeftPress?: () => void;
   onIconRightPress?: () => void;
-  height?: number,
-  labelStyle: StyleProp<TextStyle>
+  height?: number;
+  labelStyle: StyleProp<TextStyle>;
 };
 
 export const Input = forwardRef(
@@ -70,7 +70,14 @@ export const Input = forwardRef(
       <Fragment>
         {title && <Text style={[style.titleInput, labelStyle]}>{title}</Text>}
         <View
-          style={[style.boxInput, { paddingLeft: calculateSizePaddingLeft(), height: height || 40 }]}
+          style={[
+            style.boxInput,
+            {
+              paddingLeft: calculateSizePaddingLeft(),
+              height: height || 40,
+              padding: 5,
+            },
+          ]}
         >
           {IconLeft && IconLeftName && (
             <TouchableOpacity onPress={onIconLeftPress} style={style.button}>
@@ -83,7 +90,10 @@ export const Input = forwardRef(
             </TouchableOpacity>
           )}
           <TextInput
-            style={[style.input, { width: calculateSizeWidth(), height: '100%' }]}
+            style={[
+              style.input,
+              { width: calculateSizeWidth(), height: "100%" },
+            ]}
             {...rest}
           />
 
