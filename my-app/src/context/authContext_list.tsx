@@ -15,6 +15,7 @@ import { Input } from "../components/input/intex";
 import { themas } from "../global/themes";
 import { Flag } from "../components/flag";
 import CustomDateTimePicker from "../components/customDateTimePicker";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const AuthContextList: any = createContext({});
 
@@ -56,6 +57,16 @@ export const AuthProviderList = (props: any): any => {
     setSelectedDate(date);
   };
 
+  const handleSave = () => {
+    const newItem = {
+      item: 0,
+      title: 'teste',
+      description: 'teste',
+      flag: 'teste',
+      timeLimite: 'teste',
+    }
+  }
+
   const renderFlag = () =>
     flags.map((item, index) => (
       <TouchableOpacity key={index}>
@@ -76,7 +87,7 @@ export const AuthProviderList = (props: any): any => {
 
           <Text style={style.title}>Criar tarefa</Text>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => handleSave()}>
             <AntDesign name="check" size={30} />
           </TouchableOpacity>
         </View>
