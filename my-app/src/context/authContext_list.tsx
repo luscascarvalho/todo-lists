@@ -40,6 +40,7 @@ export const AuthProviderList = (props: any): any => {
   const [selectedTime, setSelectedTime] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
+  const [item, setItem] = useState(0);
 
   const onOpen = () => {
     modalizeRef.current?.open();
@@ -59,18 +60,24 @@ export const AuthProviderList = (props: any): any => {
 
   const handleSave = () => {
     const newItem = {
-      item: 0,
-      title: 'teste',
-      description: 'teste',
-      flag: 'teste',
-      timeLimite: 'teste',
-    }
-  }
+      item: Date.now(),
+      title,
+      description,
+      flag: selectedFlag,
+      timeLimite: new Date(
+        selectedDate.getFullYear(),
+        selectedDate.getMonth(),
+        selectedDate.getDate(),
+        selectedTime.getHours(),
+        selectedTime.getMinutes(),
+      ).toISOString(),
+    };
+  };
 
   const renderFlag = () =>
     flags.map((item, index) => (
-      <TouchableOpacity key={index}>
-        <Flag caption={item.caption} color={item.color} />
+      <TouchableOpacity key={index} onPress={() => {setSelectedFlag(item.caption)}}>
+        <Flag caption={item.caption} color={item.color} selected={item.caption == selectedFlag}/>
       </TouchableOpacity>
     ));
 
