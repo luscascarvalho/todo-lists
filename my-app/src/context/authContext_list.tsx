@@ -41,6 +41,7 @@ export const AuthProviderList = (props: any): any => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [item, setItem] = useState(0);
+  const [useTaskList, setUseTaskList] = useState([])
 
   const onOpen = () => {
     modalizeRef.current?.open();
@@ -78,12 +79,25 @@ export const AuthProviderList = (props: any): any => {
       };
 
       const storageData = await AsyncStorage.getItem("taskList");
-      let taskList = storageData ? JSON.parse(storageData) : []
+      let taskList = storageData ? JSON.parse(storageData) : [];
 
-      taskList.push(newItem)
+      taskList.push(newItem);
 
-      await AsyncStorage.setItem("taskList", taskList);
+      await AsyncStorage.setItem("taskList", JSON.stringify(taskList));
+
+      setUseTaskList(taskList)
+      setData();
+      onClose()
     } catch (error) {}
+  };
+
+  const setData = () => {
+    setTitle("");
+    setDescription("");
+    setSelectedFlag("urgente");
+    setItem(0);
+    setSelectedDate(new Date());
+    setSelectedTime(new Date());
   };
 
   const renderFlag = () =>
@@ -189,7 +203,7 @@ export const AuthProviderList = (props: any): any => {
   };
 
   return (
-    <AuthContextList.Provider value={{ onOpen }}>
+    <AuthContextList.Provider value={{ onOpen, useTaskList }}>
       {props.children}
       <Modalize
         ref={modalizeRef}

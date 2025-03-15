@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { style } from "./style";
@@ -7,6 +7,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Ball } from "../../components/ball";
 import { Flag } from "../../components/flag";
 import { themas } from "../../global/themes";
+import { AuthContextList } from "../../context/authContext_list";
 
 type PropCard = {
   item: number;
@@ -15,30 +16,10 @@ type PropCard = {
   flag: "urgente" | "opcional";
 };
 
-const data: Array<PropCard> = [
-  {
-    item: 0,
-    title: "Realizar a tarefa de casa",
-    description: "página 10 a 20",
-    flag: "urgente",
-  },
-
-  {
-    item: 1,
-    title: "Passear com a Malu",
-    description: "16h30",
-    flag: "urgente",
-  },
-
-  {
-    item: 2,
-    title: "Ir para a academia",
-    description: "10h",
-    flag: "urgente",
-  },
-];
-
 export default function List() {
+
+  const {} = useContext<AuthContextType>(AuthContextList)
+
   const renderCard = (item: PropCard) => {
     return (
       <TouchableOpacity style={style.card}>
