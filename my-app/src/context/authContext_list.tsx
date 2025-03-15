@@ -58,26 +58,47 @@ export const AuthProviderList = (props: any): any => {
     setSelectedDate(date);
   };
 
-  const handleSave = () => {
-    const newItem = {
-      item: Date.now(),
-      title,
-      description,
-      flag: selectedFlag,
-      timeLimite: new Date(
-        selectedDate.getFullYear(),
-        selectedDate.getMonth(),
-        selectedDate.getDate(),
-        selectedTime.getHours(),
-        selectedTime.getMinutes(),
-      ).toISOString(),
-    };
+  const handleSave = async () => {
+    if (!title || !description || !selectedFlag) {
+      return Alert.alert("Atenção, preencha os campos ai djow");
+    }
+    try {
+      const newItem = {
+        item: Date.now(),
+        title,
+        description,
+        flag: selectedFlag,
+        timeLimite: new Date(
+          selectedDate.getFullYear(),
+          selectedDate.getMonth(),
+          selectedDate.getDate(),
+          selectedTime.getHours(),
+          selectedTime.getMinutes()
+        ).toISOString(),
+      };
+
+      const storageData = await AsyncStorage.getItem("taskList");
+      let taskList = storageData ? JSON.parse(storageData) : []
+
+      taskList.push(newItem)
+
+      await AsyncStorage.setItem("taskList", taskList);
+    } catch (error) {}
   };
 
   const renderFlag = () =>
     flags.map((item, index) => (
-      <TouchableOpacity key={index} onPress={() => {setSelectedFlag(item.caption)}}>
-        <Flag caption={item.caption} color={item.color} selected={item.caption == selectedFlag}/>
+      <TouchableOpacity
+        key={index}
+        onPress={() => {
+          setSelectedFlag(item.caption);
+        }}
+      >
+        <Flag
+          caption={item.caption}
+          color={item.color}
+          selected={item.caption == selectedFlag}
+        />
       </TouchableOpacity>
     ));
 
