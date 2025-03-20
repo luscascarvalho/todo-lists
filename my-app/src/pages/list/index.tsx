@@ -8,32 +8,30 @@ import { Ball } from "../../components/ball";
 import { Flag } from "../../components/flag";
 import { themas } from "../../global/themes";
 import { AuthContextList } from "../../context/authContext_list";
-
-type PropCard = {
-  item: number;
-  title: string;
-  description: string;
-  flag: "urgente" | "opcional";
-};
+import { formatDateToBR } from "../../global/function";
 
 export default function List() {
 
-  const {} = useContext<AuthContextType>(AuthContextList)
+  const {taskList} = useContext<AuthContextType>(AuthContextList)
 
   const renderCard = (item: PropCard) => {
+
+    const color = item.flag == 'opcional' ? themas.color.blueLight : themas.color.red
+
     return (
       <TouchableOpacity style={style.card}>
         <View style={style.rowCard}>
           <View style={style.rowCardLeft}>
-            <Ball color="red"/>
+            <Ball color={color}/>
 
             <View>
               <Text style={style.titleCard}>{item.title}</Text>
               <Text style={style.descriptionCard}>{item.description}</Text>
+              <Text style={style.descriptionCard}>até {formatDateToBR(item.timeLimit)}</Text>
             </View>
           </View>
 
-          <Flag caption="Urgente" color={themas.color.red}/>
+          <Flag caption={item.flag} color={themas.color.red}/>
         </View>
       </TouchableOpacity>
     );
@@ -56,7 +54,7 @@ export default function List() {
 
       <View style={style.boxList}>
         <FlatList
-          data={data}
+          data={taskList}
           style={{ marginTop: 40, paddingHorizontal: 30 }}
           keyExtractor={(item, index) => item.item.toString()}
           renderItem={({ item, index }) => {

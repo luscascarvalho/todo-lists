@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useRef, useState } from "react";
+import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 import {
   Alert,
   Dimensions,
@@ -50,6 +50,10 @@ export const AuthProviderList = (props: any): any => {
   const onClose = () => {
     modalizeRef?.current?.close();
   };
+
+  useEffect(() => {
+    getTaskList()
+  }, [])
 
   const handleDateChange = (date: any) => {
     setSelectedDate(date);
@@ -115,6 +119,16 @@ export const AuthProviderList = (props: any): any => {
         />
       </TouchableOpacity>
     ));
+
+    async function getTaskList() {
+      try {
+        const storageData = await AsyncStorage.getItem('taskList');
+        const taskList = storageData ? JSON.parse(storageData) : []
+        setUseTaskList(taskList)
+      } catch (error) {
+        console.log(error)
+      }
+    }
 
   const container = () => {
     return (
