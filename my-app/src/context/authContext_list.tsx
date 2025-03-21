@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useRef, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   Alert,
   Dimensions,
@@ -41,7 +47,7 @@ export const AuthProviderList = (props: any): any => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [item, setItem] = useState(0);
-  const [useTaskList, setUseTaskList] = useState([])
+  const [useTaskList, setUseTaskList] = useState([]);
 
   const onOpen = () => {
     modalizeRef.current?.open();
@@ -52,8 +58,8 @@ export const AuthProviderList = (props: any): any => {
   };
 
   useEffect(() => {
-    getTaskList()
-  }, [])
+    getTaskList();
+  }, []);
 
   const handleDateChange = (date: any) => {
     setSelectedDate(date);
@@ -89,9 +95,9 @@ export const AuthProviderList = (props: any): any => {
 
       await AsyncStorage.setItem("taskList", JSON.stringify(taskList));
 
-      setUseTaskList(taskList)
+      setUseTaskList(taskList);
       setData();
-      onClose()
+      onClose();
     } catch (error) {}
   };
 
@@ -120,15 +126,26 @@ export const AuthProviderList = (props: any): any => {
       </TouchableOpacity>
     ));
 
-    async function getTaskList() {
-      try {
-        const storageData = await AsyncStorage.getItem('taskList');
-        const taskList = storageData ? JSON.parse(storageData) : []
-        setUseTaskList(taskList)
-      } catch (error) {
-        console.log(error)
-      }
+  async function getTaskList() {
+    try {
+      const storageData = await AsyncStorage.getItem("taskList");
+      const taskList = storageData ? JSON.parse(storageData) : [];
+      setUseTaskList(taskList);
+    } catch (error) {
+      console.log(error);
     }
+  }
+
+  const handleDelete = async (itemToDelete) => {
+    try {
+      const storageData = await AsyncStorage.getItem("taskList");
+      const taskList: Array<any> = storageData ? JSON.parse(storageData) : [];
+
+      const updateTaskList = taskList.filter(item => item.item !== itemToDelete.item)
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const container = () => {
     return (
