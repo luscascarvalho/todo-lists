@@ -13,7 +13,8 @@ import { formatDateToBR } from "../../global/function";
 import { Swipeable } from "react-native-gesture-handler";
 
 export default function List() {
-  const { taskList } = useContext<AuthContextType>(AuthContextList);
+  const { taskList, handleDelete, handleEdit } =
+    useContext<AuthContextType>(AuthContextList);
   const swipeableRefs = useRef([]);
   const renderRightActions = () => {
     return (
@@ -31,6 +32,15 @@ export default function List() {
     );
   };
 
+  const handleSwipeOpen = (directions: "right" | "left", item, index) => {
+    if (directions == "right") {
+      handleDelete(item);
+    } else {
+      handleEdit(item);
+    }
+    swipeableRefs.current[index]?.close();
+  };
+
   const renderCard = (item: PropCard, index) => {
     const color =
       item.flag == "opcional" ? themas.color.blueLight : themas.color.red;
@@ -41,6 +51,9 @@ export default function List() {
         key={index}
         renderRightActions={renderRightActions}
         renderLeftActions={renderLeftActions}
+        onSwipeableOpen={(directions) =>
+          handleSwipeOpen(directions, item, index)
+        }
       >
         <View style={style.card}>
           <View style={style.rowCard}>

@@ -75,7 +75,7 @@ export const AuthProviderList = (props: any): any => {
     }
     try {
       const newItem = {
-        item: Date.now(),
+        item: item !== 0 ? item : Date.now(),
         title,
         description,
         flag: selectedFlag,
@@ -136,12 +136,34 @@ export const AuthProviderList = (props: any): any => {
     }
   }
 
-  const handleDelete = async (itemToDelete) => {
+  const handleDelete = async (itemToDelete: PropCard) => {
     try {
       const storageData = await AsyncStorage.getItem("taskList");
       const taskList: Array<any> = storageData ? JSON.parse(storageData) : [];
 
-      const updateTaskList = taskList.filter(item => item.item !== itemToDelete.item)
+      const updateTaskList = taskList.filter(
+        (item) => item.item !== itemToDelete.item
+      );
+
+      await AsyncStorage.setItem("taskList", JSON.stringify(updateTaskList));
+
+      setUseTaskList(updateTaskList);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleEdit = async (itemToEdit: PropCard) => {
+    try {
+      setTitle(itemToEdit.title);
+      setDescription(itemToEdit.description);
+      setItem(itemToEdit.item);
+
+      const timeLimit = new Date(itemToEdit.timeLimit);
+      setSelectedDate(timeLimit);
+      setSelectedTime(timeLimit);
+
+      onOpen();
     } catch (error) {
       console.log(error);
     }
@@ -234,7 +256,7 @@ export const AuthProviderList = (props: any): any => {
   };
 
   return (
-    <AuthContextList.Provider value={{ onOpen, useTaskList }}>
+    <AuthContextList.Provider value={{ onOpen, useTaskList, handleDelete, handleEdit }}>
       {props.children}
       <Modalize
         ref={modalizeRef}
