@@ -47,7 +47,7 @@ export const AuthProviderList = (props: any): any => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [item, setItem] = useState(0);
-  const [useTaskList, setUseTaskList] = useState([]);
+  const [useTaskList, setUseTaskList] = useState<any[]>([]);
 
   const onOpen = () => {
     modalizeRef.current?.open();
@@ -89,9 +89,19 @@ export const AuthProviderList = (props: any): any => {
       };
 
       const storageData = await AsyncStorage.getItem("taskList");
-      let taskList = storageData ? JSON.parse(storageData) : [];
+      let taskList: Array<any> = storageData ? JSON.parse(storageData) : [];
 
       taskList.push(newItem);
+
+      const itemIndex = taskList.findIndex(
+        (task) => task.item === newItem.item
+      );
+
+      if (itemIndex >= 0) {
+        taskList[itemIndex] = newItem;
+      } else {
+        taskList.push(newItem);
+      }
 
       await AsyncStorage.setItem("taskList", JSON.stringify(taskList));
 
@@ -158,6 +168,7 @@ export const AuthProviderList = (props: any): any => {
       setTitle(itemToEdit.title);
       setDescription(itemToEdit.description);
       setItem(itemToEdit.item);
+      setSelectedFlag(itemToEdit.flag);
 
       const timeLimit = new Date(itemToEdit.timeLimit);
       setSelectedDate(timeLimit);
@@ -256,7 +267,9 @@ export const AuthProviderList = (props: any): any => {
   };
 
   return (
-    <AuthContextList.Provider value={{ onOpen, useTaskList, handleDelete, handleEdit }}>
+    <AuthContextList.Provider
+      value={{ onOpen, useTaskList, handleDelete, handleEdit }}
+    >
       {props.children}
       <Modalize
         ref={modalizeRef}
