@@ -32,7 +32,7 @@ export default function List() {
     );
   };
 
-  const handleSwipeOpen = (directions: "right" | "left", item, index) => {
+  const handleSwipeOpen = (directions: "right" | "left", item: PropCard, index: number) => {
     if (directions == "right") {
       handleDelete(item);
     } else {
