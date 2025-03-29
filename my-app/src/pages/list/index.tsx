@@ -41,7 +41,7 @@ export default function List() {
     swipeableRefs.current[index]?.close();
   };
 
-  const renderCard = (item: PropCard, index) => {
+  const renderCard = (item: PropCard, index: number) => {
     const color =
       item.flag == "opcional" ? themas.color.blueLight : themas.color.red;
 
