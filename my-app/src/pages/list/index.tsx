@@ -92,7 +92,11 @@ export default function List() {
         </Text>
 
         <View style={style.boxInput}>
-          <Input IconLeft={MaterialIcons} IconLeftName="search" />
+          <Input
+            IconLeft={MaterialIcons}
+            IconLeftName="search"
+            labelStyle={{ color: "black" }}
+          />
         </View>
       </View>
 

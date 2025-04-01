@@ -29,21 +29,21 @@ export default function Login() {
   async function getLogin() {
     try {
       setLoading(true);
-  
+
       if (!email || !password) {
         Alert.alert("Atenção", "Informe os campos obrigatórios!");
-        setLoading(false); 
-        return; 
+        setLoading(false);
+        return;
       }
-  
+
       setTimeout(() => {
         if (email === "usuario@gmail.com" && password === "123456") {
           Alert.alert("Logado com sucesso!");
-          navigation.reset({routes: [{name: "BottomRoutes"}]});
+          navigation.reset({ routes: [{ name: "BottomRoutes" }] });
         } else {
           Alert.alert("Usuário não encontrado!");
         }
-  
+
         setLoading(false);
       }, 3000);
     } catch (error) {
@@ -65,6 +65,7 @@ export default function Login() {
           IconRight={MaterialIcons}
           value={email}
           onChangeText={setEmail}
+          labelStyle={{ color: "black" }}
         />
         <Input
           title="Senha"
@@ -74,6 +75,7 @@ export default function Login() {
           onChangeText={setPassword}
           secureTextEntry={showPassword}
           onIconRightPress={() => setShowPassword(!showPassword)}
+          labelStyle={{ color: "black" }}
         />
       </View>
 
