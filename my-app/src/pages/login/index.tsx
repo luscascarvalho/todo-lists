@@ -36,6 +36,12 @@ export default function Login() {
         return;
       }
 
+      if (email == "usuario@gmail.com" && password == "1234") {
+        return navigation.reset({ routes: [{ name: "BottomRoutes" }] });
+      }else {
+        Alert.alert("Atenção", "Senha ou e-mail inválido")
+      }
+
       setTimeout(() => {
         if (email === "usuario@gmail.com" && password === "123456") {
           Alert.alert("Logado com sucesso!");
