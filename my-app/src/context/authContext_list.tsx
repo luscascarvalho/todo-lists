@@ -47,7 +47,8 @@ export const AuthProviderList = (props: any): any => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [item, setItem] = useState(0);
-  const [useTaskList, setUseTaskList] = useState<any[]>([]);
+  const [useTaskList, setUseTaskList] = useState<Array<PropCard>>([]);
+  const [taskListBackup, setTaskListBackup] = useState<Array<PropCard>>([]);
 
   const onOpen = () => {
     modalizeRef.current?.open();
@@ -106,6 +107,7 @@ export const AuthProviderList = (props: any): any => {
       await AsyncStorage.setItem("taskList", JSON.stringify(taskList));
 
       setUseTaskList(taskList);
+      setTaskListBackup(taskList);
       setData();
       onClose();
     } catch (error) {}
@@ -141,6 +143,7 @@ export const AuthProviderList = (props: any): any => {
       const storageData = await AsyncStorage.getItem("taskList");
       const taskList = storageData ? JSON.parse(storageData) : [];
       setUseTaskList(taskList);
+      setTaskListBackup(taskList);
     } catch (error) {
       console.log(error);
     }
@@ -158,6 +161,7 @@ export const AuthProviderList = (props: any): any => {
       await AsyncStorage.setItem("taskList", JSON.stringify(updateTaskList));
 
       setUseTaskList(updateTaskList);
+      setTaskListBackup(updateTaskList);
     } catch (error) {
       console.log(error);
     }
@@ -178,6 +182,24 @@ export const AuthProviderList = (props: any): any => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const filter = (t: string) => {
+    if (useTaskList.length == 0) return;
+    if (!t) return;
+
+    const array = taskListBackup;
+    const campos = ["title", "description"];
+
+    const searchTerm = t.trim().toLowerCase();
+
+    const filteredArray = array.filter((item)=> {
+      for(let i = 0; i < campos.length; i++){
+        if(item[campos[i]].trim().toLowerCase())
+
+      }
+  
+    })
   };
 
   const container = () => {
