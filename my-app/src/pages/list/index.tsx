@@ -13,7 +13,7 @@ import { formatDateToBR } from "../../global/function";
 import { Swipeable } from "react-native-gesture-handler";
 
 export default function List() {
-  const { taskList, handleDelete, handleEdit } =
+  const { taskList, handleDelete, handleEdit, filter } =
     useContext<AuthContextType>(AuthContextList);
   const swipeableRefs = useRef<(Swipeable | null)[]>([]);
   const renderRightActions = () => {
@@ -96,6 +96,7 @@ export default function List() {
             IconLeft={MaterialIcons}
             IconLeftName="search"
             labelStyle={{ color: "black" }}
+            onChangeText={(t) => filter(t)}
           />
         </View>
       </View>
