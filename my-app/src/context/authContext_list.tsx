@@ -193,7 +193,7 @@ export const AuthProviderList = (props: any): any => {
 
       const filteredArray = array.filter((item) => {
         for (let i = 0; i < campos.length; i++) {
-          if (item[campos[i]].trim().toLowerCase().includes(searchTerm))
+          if ((item as any)[campos[i]].trim().toLowerCase().includes(searchTerm))
             return true;
         }
       });
