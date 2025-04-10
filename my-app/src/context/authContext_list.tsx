@@ -67,7 +67,7 @@ export const AuthProviderList = (props: any): any => {
   };
 
   const handleTimeChange = (date: any) => {
-    setSelectedDate(date);
+    setSelectedTime(date);
   };
 
   const handleSave = async () => {
