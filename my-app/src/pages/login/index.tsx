@@ -14,7 +14,7 @@ import { style } from "./styles";
 import Logo from "../../assets/logo.png";
 import { MaterialIcons, Octicons } from "@expo/vector-icons";
 import { themas } from "../../global/themes";
-import { Input } from "../../components/input/intex";
+import { Input } from "../../components/input";
 import { Button } from "../../components/button";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 

@@ -2,7 +2,7 @@ import React, { useContext, useRef } from "react";
 
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { style } from "./style";
-import { Input } from "../../components/input/intex";
+import { Input } from "../../components/input";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { Ball } from "../../components/ball";
 import { Flag } from "../../components/flag";
