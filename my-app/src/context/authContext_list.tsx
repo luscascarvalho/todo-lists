@@ -9,6 +9,7 @@ import { themas } from "../global/themes";
 import { Flag } from "../components/flag";
 import { Input } from "../components/input";
 import { Modalize } from "react-native-modalize";
+import { Loading } from "../components/loading/loading";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import CustomDateTimePicker from "../components/customDateTimePicker";
@@ -21,13 +22,12 @@ import {
   Platform,
   ScrollView,
 } from "react-native";
-import { Loading } from "../components/Loading";
 
 export const AuthContextList: any = createContext({});
 
 const flags = [
-  { caption: "urgente", color: themas.Colors.red },
-  { caption: "opcional", color: themas.Colors.blueLigth },
+  { caption: "urgente", color: themas.color.red },
+  { caption: "opcional", color: themas.color.blueLight },
 ];
 
 export const AuthProviderList = (props) => {
