@@ -30,8 +30,8 @@ const flags = [
   { caption: "opcional", color: themas.color.blueLight },
 ];
 
-export const AuthProviderList = (props) => {
-  const modalizeRef = useRef(null);
+export const AuthProviderList = (props: React.PropsWithChildren<{}>) => {
+  const modalizeRef = useRef<Modalize>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [selectedFlag, setSelectedFlag] = useState("urgente");
@@ -47,7 +47,6 @@ export const AuthProviderList = (props) => {
   const onOpen = () => {
     modalizeRef.current?.open();
   };
-
   const onClose = () => {
     modalizeRef.current?.close();
   };
