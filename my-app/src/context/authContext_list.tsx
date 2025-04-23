@@ -55,11 +55,11 @@ export const AuthProviderList = (props: React.PropsWithChildren<{}>) => {
     get_taskList();
   }, []);
 
-  const handleDateChange = (date) => {
+  const handleDateChange = (date: Date) => {
     setSelectedDate(date);
   };
 
-  const handleTimeChange = (date) => {
+  const handleTimeChange = (date: Date) => {
     setSelectedTime(date);
   };
   const handleSave = async () => {
