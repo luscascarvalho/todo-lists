@@ -39,8 +39,8 @@ export const AuthProviderList = (props: React.PropsWithChildren<{}>) => {
   const [selectedTime, setSelectedTime] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
-  const [taskList, setTaskList] = useState([]);
-  const [taskListBackup, setTaskListBackup] = useState([]);
+  const [taskList, setTaskList] = useState<PropCard[]>([]);
+  const [taskListBackup, setTaskListBackup] = useState<PropCard[]>([]);
   const [item, setItem] = useState(0);
   const [loading, setLoading] = useState(false);
 
@@ -62,6 +62,7 @@ export const AuthProviderList = (props: React.PropsWithChildren<{}>) => {
   const handleTimeChange = (date: Date) => {
     setSelectedTime(date);
   };
+
   const handleSave = async () => {
     const newItem = {
       item: item !== 0 ? item : Date.now(),
@@ -85,7 +86,7 @@ export const AuthProviderList = (props: React.PropsWithChildren<{}>) => {
 
       // Verifica se o item já existe no array
       const itemIndex = taskList.findIndex(
-        (task) => task.item === newItem.item
+        (task: PropCard) => task.item === newItem.item
       );
 
       if (itemIndex >= 0) {
@@ -109,19 +110,20 @@ export const AuthProviderList = (props: React.PropsWithChildren<{}>) => {
   };
 
   const filter = (t: string) => {
-    if (taskList.length == 0) return;
+    if (taskList.length === 0) return;
     const array = taskListBackup;
-    const campos = ["title", "description"];
+    const campos: (keyof PropCard)[] = ["title", "description"];
+    
     if (t) {
       const searchTerm = t.trim().toLowerCase();
-
-      const filteredArr = array.filter((item) => {
-        for (let i = 0; i < campos.length; i++) {
-          if (item[campos[i].trim()].trim().toLowerCase().includes(searchTerm))
-            return true;
-        }
+  
+      const filteredArr = array.filter((item: PropCard) => {
+        return campos.some((campo) => {
+          const value = item[campo];
+          return typeof value === 'string' && value.toLowerCase().includes(searchTerm);
+        });
       });
-
+  
       setTaskList(filteredArr);
     } else {
       setTaskList(array);
