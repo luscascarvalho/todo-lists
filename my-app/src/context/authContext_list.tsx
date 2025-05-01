@@ -143,14 +143,14 @@ export const AuthProviderList = (props: React.PropsWithChildren<{}>) => {
     onOpen();
   };
 
-  const handleDelete = async (itemToDelete) => {
+  const handleDelete = async (itemToDelete: PropCard) => {
     try {
       setLoading(true);
       const storedData = await AsyncStorage.getItem("taskList");
       const taskList = storedData ? JSON.parse(storedData) : [];
 
       const updatedTaskList = taskList.filter(
-        (item) => item.item !== itemToDelete.item
+        (item: PropCard) => item.item !== itemToDelete.item
       );
 
       await AsyncStorage.setItem("taskList", JSON.stringify(updatedTaskList));
