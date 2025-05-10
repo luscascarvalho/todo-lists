@@ -11,6 +11,7 @@ import { AuthContextList } from "../../context/authContext_list";
 import { formatDateToBR } from "../../global/function";
 
 import { Swipeable } from "react-native-gesture-handler";
+import { AuthContextType, PropCard } from "../../global/props";
 
 export default function List() {
   const { taskList, handleDelete, handleEdit, filter } =

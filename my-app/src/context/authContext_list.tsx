@@ -22,6 +22,7 @@ import {
   Platform,
   ScrollView,
 } from "react-native";
+import { PropCard } from "../global/props";
 
 export const AuthContextList: any = createContext({});
 
